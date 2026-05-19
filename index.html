@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeLink - Sistema de Comunicação Empresarial</title>
+
+    <style>
+        /* RESET E CONFIGURAÇÃO DA FONTE EXIGIDA PELO EDITAL (ARIAL) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #0b111e;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* BARRA DE NAVEGAÇÃO FIXA (HUMANO / PROFISSIONAL) */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(11, 17, 30, 0.95);
+            border-bottom: 1px solid #1e293b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav .logo-txt {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        nav .logo-txt span {
+            color: #104494;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #104494;
+        }
+
+        /* HEADER / HERO - TÓPICO 1: IDENTIFICAÇÃO */
+        header {
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0b111e, #131c2e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 8% 80px 8%;
+        }
+
+        .hero {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .tag-topico {
+            display: inline-block;
+            background: rgba(16, 68, 148, 0.2);
+            color: #3b82f6;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            border: 1px solid #104494;
+        }
+
+        .hero-text h1 {
+            font-size: 64px;
+            color: #104494; /* Azul Oficial da Logo */
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .hero-text h2 {
+            font-size: 26px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .hero-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #94a3b8;
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #104494;
+            color: white;
+            box-shadow: 0 4px 14px rgba(16, 68, 148, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: #0b326b;
+        }
+
+        .btn-secondary {
+            border: 2px solid #104494;
+            color: white;
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background: #104494;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            background: #ffffff; 
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+        }
+
+        /* SEÇÕES GERAIS */
+        section {
+            padding: 90px 8%;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .bg-darker {
+            background: #070b13;
+        }
+
+        .section-title {
+            text-align: left;
+            margin-bottom: 50px;
+            max-width: 800px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            color: #ffffff;
+            font-weight: 800;
+            margin-top: 5px;
+        }
+
+        .section-title h2 span {
+            color: #104494;
+        }
+
+        .section-title p {
+            color: #94a3b8;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        /* CARDS / GRIDS */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .custom-card {
+            background: #131c2e;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #1e293b;
+            transition: 0.3s;
+        }
+
+        .custom-card:hover {
+            border-color: #104494;
+            transform: translateY(-5px);
+        }
+
+        .custom-card h3 {
+            color: #ffffff;
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            border-left: 4px solid #104494;
+            padding-left: 12px;
+        }
+
+        .custom-card p {
+            color: #94a3b8;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* TEXTO DETALHADO PÓS-CARDS (PARA GARANTIR AS 5 PÁGINAS) */
+        .detalhamento-texto {
+            margin-top: 40px;
+            background: rgba(19, 28, 46, 0.5);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #1e293b;
+        }
+
+        .detalhamento-texto p {
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 15px;
+        }
+
+        /* ORGANOGRAMA VISUAL - TÓPICO 2 */
+        .organograma-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+            background: #131c2e;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #1e293b;
+        }
+
+        .node {
+            background: #0b111e;
+            padding: 18px 35px;
+            border-radius: 8px;
+            border: 2px solid #104494;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .linha-v {
+            width: 2px;
+            height: 35px;
+            background: #104494;
+        }
+
+        .row-nodes {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        /* FOOTER INSTITUCIONAL REQUISITO */
+        footer {
+            background: #05070c;
+            padding: 60px 8% 40px 8%;
+            text-align: center;
+            border-top: 2px solid #104494;
+        }
+
+        footer h2 {
+            color: #ffffff;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        footer h2 span {
+            color: #104494;
+        }
+
+        footer .info-ifes {
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 20px;
+            line-height: 1.7;
+        }
+
+        /* RESPONSIVIDADE */
+        @media(max-width: 900px) {
+            header { padding-top: 140px; }
+            .hero-text h1 { font-size: 45px; }
+            nav ul { display: none; } /* Mobile simplificado */
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo-txt">Code<span>Link</span></div>
+        <ul>
+            <li><a href="#topico1">1. Identificação</a></li>
+            <li><a href="#topico2">2. Estrutura</a></li>
+            <li><a href="#topico3">3. Plataforma</a></li>
+            <li><a href="#topico4">4. Comunicação</a></li>
+            <li><a href="#topico6">6. Responsabilidade</a></li>
+        </ul>
+    </nav>
+
+    <header id="topico1">
+        <div class="hero">
+            <div class="hero-text">
+                <span class="tag-topico">Tópico 1 · Identificação da Empresa</span>
+                <h1>CodeLink</h1>
+                <h2>Conectando Programadores Freelancers às Empresas do Futuro</h2>
+                <p>
+                    A <strong>CodeLink</strong> é uma organização digital fictícia concebida sob o ecossistema e setor de prestação de serviços digitais e intermediação corporativa tecnológica. Inspirada na dinâmica de inovação do filme <em>"Os Estagiários"</em>, a empresa soluciona o gargalo de contratação técnica do mercado moderno. Atuamos diretamente ligando desenvolvedores autônomos a demandas urgentes de software de empresas de qualquer porte, centralizando portfólios, fluxos de validação de código e transações contratuais seguras dentro da nossa infraestrutura proprietária.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#topico3" class="btn btn-primary">Ver Serviços</a>
+                    <a href="#topico4" class="btn btn-secondary">Plano de Comunicação</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="Logo CodeLink.png" alt="Logomarca Oficial CodeLink">
+            </div>
+        </div>
+    </header>
+
+    <section id="topico2" class="bg-darker">
+        <div class="section-title">
+            <span class="tag-topico">Tópico 2 · Estrutura Organizacional</span>
+            <h2>Nossa Identidade e <span>Liderança</span></h2>
+            <p>O alicerce estratégico corporativo que rege o comportamento sociocultural e operacional da equipe CodeLink.</p>
+        </div>
+
+        <div class="grid-layout">
+            <div class="custom-card">
+                <h3>Missão</h3>
+                <p>Conectar o mercado corporativo global aos melhores talentos técnicos de forma ágil, transparente e desburocratizada, impulsionando e viabilizando a transformação digital de negócios através do trabalho colaborativo descentralizado.</p>
+            </div>
+            <div class="custom-card">
+                <h3>Visão</h3>
+                <p>Tornar-se a principal e mais confiável plataforma de intermediação e gestão de talentos de TI das Américas até o ano de 2028, transformando-se no padrão de mercado para contratações ágeis em tecnologia.</p>
+            </div>
+            <div class="custom-card">
+                <h3>Valores</h3>
+                <p>Inovação disruptiva contínua, transparência absoluta em negociações, rigor metodológico em segurança cibernética, inclusão social e diversidade nas frentes de engenharia de software e valorização do profissional autônomo.</p>
+            </div>
+        </div>
+
+        <div class="detalhamento-texto">
+            <p><strong>Definição do Público-Alvo Corporativo:</strong> O ecossistema mercadológico da CodeLink é perfeitamente bifurcado de maneira a atingir com eficácia as duas frentes necessárias da plataforma. De um lado, como clientes contratantes, focamos em pequenas e médias empresas (PMEs), startups em fase de tração e consolidação, e laboratórios de inovação interna de grandes corporações que necessitam escalar suas squads de desenvolvimento sem arcar com encargos fixos e lentidão dos modelos CLT tradicionais.</p>
+            <p>Na outra ponta, como prestadores de serviços parceiros, acolhemos desenvolvedores de software fullstack, engenheiros de dados, designers de experiência do usuário (UI/UX) e especialistas em infraestrutura em nuvem (DevOps) que priorizam a flexibilidade geográfica e a autonomia financeira proporcionada pelas carreiras independentes.</p>
+        </div>
+
+        <div class="organograma-wrapper">
+            <h3 style="color: white; margin-bottom: 25px; font-size: 20px;">Organograma Funcional Simplificado</h3>
+            <div class="node">Diretoria Executiva (CEO)</div>
+            <div class="linha-v"></div>
+            <div class="row-nodes">
+                <div class="node">Tecnologia (CTO)</div>
+                <div class="node">Marketing & Comunicação (CMO)</div>
+                <div class="node">Operações (COO)</div>
+            </div>
+            <div class="linha-v"></div>
+            <div class="row-nodes">
+                <div class="node" style="font-size:13px; border-color: #475569;">Engenharia & IA</div>
+                <div class="node" style="font-size:13px; border-color: #475569;">Assessoria & Redes Sociais</div>
+                <div class="node" style="font-size:13px; border-color: #475569;">Suporte & Ouvidoria</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="topico3">
+        <div class="section-title">
+            <span class="tag-topico">Tópico 3 · Plataforma Digital</span>
+            <h2>Funcionamento e <span>Soluções</span> Oferecidas</h2>
+            <p>Compreenda os pilares operacionais de nosso sistema digital corporativo de ponta.</p>
+        </div>
+
+        <div class="detalhamento-texto" style="margin-bottom: 40px;">
+            <p><strong>Como Funciona a Plataforma CodeLink:</strong> O fluxo transacional inicia-se quando a empresa contratante publica um escopo detalhado de sua dor tecnológica no sistema. Automaticamente, nosso algoritmo proprietário de Inteligência Artificial realiza uma varredura preditiva em tempo real na base de dados, cruzando linguagens requeridas, nível de senioridade e avaliações prévias do portfólio dos freelancers. Em poucos minutos, um "Match Corporativo" é estabelecido, apresentando os três profissionais mais qualificados para o projeto, economizando semanas de processos tradicionais de Recursos Humanos.</p>
+        </div>
+
+        <div class="grid-layout">
+            <div class="custom-card">
+                <h3>Desenvolvimento de Sites</h3>
+                <p>Estruturação de portais corporativos complexos, e-commerces escaláveis e landing pages de alta conversão, unindo práticas avançadas de SEO e arquiteturas limpas.</p>
+            </div>
+            <div class="custom-card">
+                <h3>Aplicativos Mobile</h3>
+                <p>Arquitetura e programação nativa ou híbrida para ambientes iOS e Android, focados em máxima performance computacional e fluidez de interface de usuário.</p>
+            </div>
+            <div class="custom-card">
+                <h3>Manutenção de Sistemas</h3>
+                <p>Auditorias técnicas, refatoração de códigos legados, otimização crítica de banco de dados relacionais e resolução especializada de falhas operacionais e bugs.</p>
+            </div>
+            <div class="custom-card">
+                <h3>Suporte Remoto 24/7</h3>
+                <p>Gestão e deploy em ambientes de computação em nuvem, configuração de rotinas DevOps de integração contínua (CI/CD) e contenção ágil de brechas de segurança.</p>
+            </div>
+        </div>
+
+        <div class="detalhamento-texto">
+            <p><strong>Diferenciais Competitivos de Mercado:</strong> O maior diferencial da CodeLink perante os concorrentes tradicionais do mercado reside em nossa curadoria técnica ativa e no uso de contratos automatizados com garantia escrow (retenção financeira de proteção). Diferente de outras plataformas abertas que sofrem com a falta de filtragem, cada desenvolvedor em nosso banco passa por testes práticos rigorosos de lógica de programação antes da aprovação do perfil, mitigando erros nas pontas contratuais.</p>
+            <p><strong>Formas Oficiais de Comunicação com o Cliente:</strong> Para blindar a experiência corporativa, a CodeLink disponibiliza três canais integrados de contato: uma sala de chat e videoconferência criptografada nativa para reuniões de alinhamento técnico entre cliente e desenvolvedor; uma central de atendimento via tickets com Acordo de Nível de Serviço (SLA) de resposta humana de no máximo 4 horas úteis; e alertas automatizados via API estruturada de WhatsApp para notificar alterações cruciais no status do projeto.</p>
+        </div>
+    </section>
+
+    <section id="topico4" class="bg-darker">
+        <div class="section-title">
+            <span class="tag-topico">Tópico 4 · Comunicação Empresarial</span>
+            <h2>Estratégia e <span>Fluxos</span> Informacionais</h2>
+            <p>Detalhamento de como nossa corporação gerencia a troca de mensagens, linguagens e dados interna e externamente.</p>
+        </div>
+
+        <div class="grid-layout">
+            <div class="custom-card">
+                <h3>Comunicação Interna</h3>
+                <p>A cultura corporativa interna adota rituais estritos de alinhamento utilizando o <strong>Slack</strong> segmentado por canais técnicos para mensagens instantâneas. A documentação institucional de processos fica concentrada no <strong>Notion</strong> (nossa Wiki corporativa). Reuniões gerais de metas da equipe interna acontecem mensalmente via <strong>Google Meet</strong>.</p>
+            </div>
+            <div class="custom-card">
+                <h3>Comunicação Externa</h3>
+                <p>Gerenciada por comunicados oficiais à imprensa especializada (Press Releases) e pela publicação quinzenal de artigos de liderança de pensamento (Thought Leadership) produzidos pelos diretores no canal oficial da empresa no Medium, abordando o futuro do trabalho digital.</p>
+            </div>
+            <div class="custom-card">
+                <h3>Redes Sociais</h3>
+                <p>Atuação focada e segmentada. No <strong>LinkedIn</strong> mantemos um tom puramente formal, publicando cases de sucesso B2B para captar novos líderes corporativos. No <strong>Instagram e TikTok</strong>, a linguagem torna-se descontraída, focando na rotina de desenvolvimento e atração orgânica de talentos freelancer.</p>
+            </div>
+            <div class="custom-card">
+                <h3>E-mail Corporativo</h3>
+                <p>O e-mail atua como a ferramenta formal padrão para envios de documentação legal, relatórios de auditoria financeira e contratos assinados digitalmente. Implementamos fluxos automatizados de Inbound Mail para nutrição de leads corporativos que demonstraram interesse no serviço.</p>
+            </div>
+            <div class="custom-card">
+                <h3>Atendimento ao Cliente</h3>
+                <p>Adotamos uma abordagem Omnichannel híbrida altamente eficaz. O primeiro nível de triagem é conduzido por nossa inteligência artificial de conversação natural para dúvidas frequentes. Caso o problema exija mediação, o caso é repassado em menos de 5 minutos para nossa Ouvidoria Humana técnica.</p>
+            </div>
+            <div class="custom-card">
+                <h3>Marketing Digital</h3>
+                <p>Baseia-se em marketing de conteúdo profundo com otimização contínua de mecanismos de busca (SEO) para atrair tráfego qualificado de empresas. Paralelamente, executamos campanhas cirúrgicas de tráfego pago via LinkedIn Ads direcionadas exclusivamente para perfis de gerentes de tecnologia, CTOs e CEOs.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="topico6">
+        <div class="section-title">
+            <span class="tag-topico">Tópico 6 · Responsabilidade Social e Ética</span>
+            <h2>Governança, <span>Sustentabilidade</span> e Inclusão</h2>
+            <p>As diretrizes e compromissos éticos que guiam nossa conduta moral e o impacto que geramos na sociedade.</p>
+        </div>
+
+        <div class="grid-layout">
+            <div class="custom-card">
+                <h3>Atuação Ética & Governança</h3>
+                <p>Operamos em total e irrestrita conformidade com a Lei Geral de Proteção de Dados (LGPD), utilizando criptografia ponta a ponta na proteção das informações sensíveis dos usuários. Nossa governança financeira é assegurada por contratos inteligentes que travam o pagamento do projeto em juízo digital (Escrow), garantindo a justa remuneração do freelancer e a segurança de entrega do contratante.</p>
+            </div>
+            <div class="custom-card">
+                <h3>Ações de Responsabilidade Social</h3>
+                <p>Criamos e mantemos de forma ativa o programa filantrópico <strong>CodeForGood</strong>. Através dessa iniciativa interna, a plataforma CodeLink abre mão de 100% de qualquer taxa de intermediação corporativa para projetos tecnológicos focados em Organizações Não Governamentais (ONGs) devidamente regulamentadas, fomentando o uso da tecnologia para fins sociais humanitários.</p>
+            </div>
+            <div class="custom-card">
+                <h3>Práticas Sustentáveis e Inclusivas</h3>
+                <p>No pilar da **Sustentabilidade**, nossa plataforma funciona exclusivamente em servidores hospedados em nuvem ecológica com selo <em>Green Hosting</em>, operando com pegada de carbono auditada e totalmente neutra. Na frente da **Inclusão**, a CodeLink reinveste 5% de seu lucro operacional em um fundo anual de bolsas de especialização avançada em programação exclusivo para minorias sociais e pessoas em vulnerabilidade econômica.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h2>Code<span>Link</span></h2>
+        <p>Conectando talentos à inovação digital com ética, sustentabilidade e clareza corporativa.</p>
+        
+        <div class="info-ifes">
+            <strong>INSTITUTO FEDERAL DO ESPÍRITO SANTO — CAMPUS COLATINA</strong><br>
+            Curso Superior de Tecnologia em Sistemas de Informação (SI)<br>
+            Trabalho Final Prático Exigido para a Disciplina de Comunicação Empresarial<br>
+            Período de Entrega no AVA: 29/05 a 12/06/2026 | Ano Letivo: 2026<br>
+            <span style="font-size: 12px; color: #475569;">Desenvolvido pelo Grupo Teórico-Prático (3 Integrantes)</span>
+        </div>
+    </footer>
+
+</body>
+
+</html>
